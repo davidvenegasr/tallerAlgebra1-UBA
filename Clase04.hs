@@ -62,4 +62,61 @@ func4 n q
   | n >0 && q > 0 = func2 (2*n) q
 
 -- q^(2*n) + func3 (n-1) q 
+--Implementar la funci´on esPar :: Integer -> Bool que determine si un n´umero natural es
+--par. No est´a permitido utilizar mod ni div.
 
+esPar :: Integer -> Bool
+esPar x 
+  | x == 1 = False 
+  | x == 2 = True
+  | x > 2 = esPar (x-2)
+  
+-- para este ejericio se considera que los numeros naturaes no incluyen al cero
+
+
+esPar2 :: Integer -> Bool
+esPar2 x
+  | x == 1 = False
+  | x > 1 = not (esPar2 (x-1))
+
+-- esta funcion alternativa se basa en considerar que los numeros naturales se encuentran de forma ordenada de par e impar
+-- por lo que si el numero anterior es impar, el numero siguiente sera par.
+
+{-|
+   Escribir una funci´on para determinar si un n´umero natural es m´ultiplo de 3. No est´a
+permitido utilizar mod ni div.
+-}
+
+esMult3 :: Integer-> Bool
+esMult3 x
+   | x == 3 = True
+   | x > 3 = esMult3 (x-3)
+   | otherwise = False
+   
+{-|Implementar la funci´on sumaImpares :: Integer -> Integer que dado n ∈ N sume los
+primeros n n´umeros impares. Ej: sumaImpares 3 1+3+5 9.
+-}
+sumaImpares :: Integer -> Integer
+sumaImpares x
+  | x == 1 = 1
+  | x > 1 = (2*x -1) + sumaImpares (n - 1)
+
+{-|
+Escribir una funci´on doblefact que dado n ∈ N calcula n!! = n (n − 2)(n − 4) · · · . Por
+ejemplo:
+doblefact 10 10 ∗ 8 ∗ 6 ∗ 4 ∗ 2 3840.
+doblefact 9 9 ∗ 7 ∗ 5 ∗ 3 ∗ 1 945.
+-}
+
+doblefact :: Integer -> Integer
+doblefact  x
+  | x == 0 = 1
+  | x == 1 = 1
+  | x > 1 = x * doblefact (x-2) 
+
+{-| Escribir una funci´on recursiva que no termine si se la ejecuta con enteros negativos (y en
+cambio s´ı termine para el resto de los enteros).
+-}
+ noTermina x
+  | x == 0 = 0 
+  | otherwise = noTermina (x-1)
