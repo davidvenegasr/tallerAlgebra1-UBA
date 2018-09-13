@@ -1,4 +1,8 @@
 # talleralgebra1-UBA
-Exercises related to Algebra Lab at UBA -DC
+Exercises related to Algebra Lab at UBA - DC  
 
-Hi, am a CS student at UBA. I like pancakes and chocolate ice cream.
+--------------
+
+Ejercicios correspondientes a la cursada del Laboratorio de Algebra 1 dicado por el Departamento de Computacion en la Facultad de Ciencias Exactas de la Universidad de Buenos Aires en el 2do cuatrimestre 2018.
+
+Los presentes ejercicios tiene el objetivo de facilitar la practica de la materia y los ejercicios asignados en clase. No han sido revisados directamente por ningun docente de la materia, por lo tanto pueden contener errores. 
