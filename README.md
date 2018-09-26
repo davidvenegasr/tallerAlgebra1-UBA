@@ -1,4 +1,4 @@
-# talleralgebra1-UBA
+# tallerAlgebra1-UBA
 Exercises related to Algebra Lab at UBA - DC  
 
 --------------
