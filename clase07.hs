@@ -21,6 +21,7 @@ sumPro (x:xs) = x + sum xs
 pertenece2 :: Integer -> [Integer] -> Bool
 pertenece2 x [] = False
 pertenece2 x ys = x == head ys || pertenece x (tail ys)
+--para este ejercicio se pidio representar la funcion pertenece usando pattern matching
 
 productoria :: [Integer] -> Integer
 productoria [] = 1
@@ -62,15 +63,20 @@ quitar n (x:xs)
  | otherwise = x:(quitar n xs)
  
 hayRepetidos :: [Integer] -> Bool
-hayrepetidos [] = False
-                     
+hayRepetidos [] = False
 
 
+maximo :: [Integer] -> Integer      
+maximo [] = 0
+maximo (x:xs) 
+ | (maximo xs) > x = maximo xs
+ | otherwise = x
  
-           
-
-
+maximum :: [Integer] -> Integer
+maximum [] = error "empty list"
+maximum [x] = x
+maximum (x:xs) = maximum x (maximum xs)
+    
 ordenar:: [Integer] -> [Integer]
-ordenar = undefined
-
-
+ordenar [] = []
+ordenar (x:xs) = undefined
