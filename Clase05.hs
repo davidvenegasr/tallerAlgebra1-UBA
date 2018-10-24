@@ -33,26 +33,49 @@ divisionCompleta a d
   | a >= d = (fst qr' + 1 , snd qr') 
   | otherwise = (fst qrn - 1 , snd qrn)  
    where qr' = division (a-d) d
-         qrn = division2 (a + d) d
+         qrn = division (a + d) d
 
 
 sumaDivisoresHasta :: Integer -> Integer -> Integer
 sumaDivisoresHasta x y 
- | y == 1 =  1
- | y > 1 = (sumaDivisoresHasta x (y-1)) + (sumoSiEsDivisor x y)
+  | y == 1 =  1
+  | y > 1 = (sumaDivisoresHasta x (y-1)) + (sumoSiEsDivisor x y)
 
 sumoSiEsDivisor :: Integer-> Integer -> Integer
 sumoSiEsDivisor x y 
- | mod x y /= 0 = 0 
- | mod x y == 0 = y
-
+  | mod x y /= 0 = 0 
+  | mod x y == 0 = y
+ 
+sumaDivisores :: Integer -> Integer
+sumaDivisores x
+  | x == 0 =  0
+  | x > 1 = sumaDivisoresHasta x x
 
 menorDivisor :: Integer -> Integer
 menorDivisor x 
- | x mod k == 0 = k
- where k = menorDivisor x + 1 
+  | sumaDivisores x == (x+1) = x 
+  | otherwise = auxMenorDivisor x 2
 
---esPrimo :: Integer -> Bool
---esPrimo = Undefined
+auxMenorDivisor :: Integer -> Integer -> Integer
+auxMenorDivisor x b 
+  | mod x b == 0 = b
+  | otherwise = auxMenorDivisor x (b+1)
 
+ 
+esPrimo :: Integer -> Bool
+esPrimo x = menorDivisor x == x 
 
+func :: Integer -> Float -> Float 
+func n m 
+  | m == 1 = suma (fromIntegral n)
+  | otherwise = func2 n m + func n (m-1)
+----problema solo funciona cuando n = m  
+suma :: Float -> Float
+suma 1 = 1
+suma x = x + suma (x-1)
+
+func2 :: Integer -> Float -> Float
+func2 o p  
+  | o == 1 = 1
+  | o > 1 = p^(o) + func2 (o-1) p
+  
