@@ -56,3 +56,38 @@ contadorCollatz:: Integer -> Integer -> (Integer, Integer)
 contadorCollatz 1 y = (1, y)
 contadorCollatz x y = (x, y) `sumaa` contadorCollatz (collatz x) (y + 1)
   where sumaa (a,b) (c,d) = (a, d)   
+
+
+
+
+
+sumaDigitos :: Integer -> Integer
+sumaDigitos 0 = 0
+sumaDigitos n = n `mod` 10 + sumaDigitos (n `div` 10)
+
+digitosIguales :: Integer -> Bool
+digitosIguales n 
+	| n < 0 = digitosIguales ((-1)*n)
+	| n <10 = True
+	| otherwise = ((mod n 10) == mod (div n 10) 10) && (digitosIguales (div n 10) ) 
+
+collatz :: Integer -> Integer
+collatz n
+	| mod n 2 ==0 = div n 2
+	| otherwise = 3*n+1	
+
+mayorSequenciaCollatz :: Integer -> (Integer, Integer)
+mayorSequenciaCollatz 1 = (1,1)
+mayorSequenciaCollatz x = contadorCollatz x 1 `chequearMayor` mayorSequenciaCollatz (x-1)
+
+chequeoMayorSeq
+chequearMayor :: (Integer, Integer) -> (Integer, Integer) -> (Integer, Integer)
+chequearMayor (a,b) (c,d) | d > b = (c,d)
+                          | otherwise = (a,b) 
+
+contadorCollatz:: Integer -> Integer -> (Integer, Integer)
+contadorCollatz 1 y = (1, y)
+contadorCollatz x y = (x, y) `sumaa` contadorCollatz (collatz x) (y + 1)
+
+sumaa :: (Integer, Integer) -> (Integer, Integer) -> (Integer, Integer)
+sumaa (a,b) (c,d) = (a, d) 
