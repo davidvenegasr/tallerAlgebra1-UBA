@@ -1,0 +1,81 @@
+-- Ejercicio 1 (Ver pdf Parcial_Taller -PC2018.pdf)
+
+segundoDecimal :: Integer -> Integer
+segundoDecimal x 
+  | mod (div x 10) 10 < 10 = mod (div x 10) 10 -- si el resto de divir un numero por 10 es una unidad devolvemos entonces el 2do decimal
+  
+min :: (Integer, Integer, Integer) -> Integer
+min (a1,b1,c1) 
+  | a < b && a < c = a
+  | b < a && b < c = b
+  | c < a && c < b = c
+  | otherwise = 0
+   where a = segundoDecimal a1
+         b = segundoDecimal b1
+         c = segundoDecimal c1 
+
+--Ejercicio 2
+
+sucesion :: Integer -> Integer
+sucesion 1 = 1
+sucesion x = 1 + sumatoria (x-1) 
+
+sumatoria ::Integer -> Integer 
+sumatoria 1 = 1 
+sumatoria n = n*(sucesion n) + sumatoria (n-1) 
+
+--Ejercicio 3 
+
+esSumaDeCuadrados :: Integer -> Bool
+esSumaDeCuadrados 1 = True
+esSumaDeCuadrados x = eSC2 (x-1) 1
+
+eSC2 :: Integer -> Integer -> Bool
+eSC2 0 b = False
+eSC2 x b | esCuadrado (x) && esCuadrado b = True
+         | otherwise = eSC2 (x-1) (b+1)
+     
+--se supone que esCuadrado es una funcion que no tenemos que definir pero para probar el codigo hacemos    
+
+perfectSquare pRoot pSquare | pow(pRoot) == pSquare = True
+                            | pow(pRoot)>pSquare = perfectSquare (pRoot-1) pSquare
+                            | otherwise = False
+                             where pow n = n*n
+
+esCuadrado :: Integer -> Bool
+esCuadrado number = perfectSquare number number
+
+reglaDescartes :: [Integer] -> Integer 
+reglaDescartes [] = 0
+reglaDescartes [x,y] 
+  | x > 0 && y < 0 || x < 0 && y > 0 = 1
+  | otherwise = 0                  
+reglaDescartes (x:y:xs) 
+  | x > 0 && y < 0 || x < 0 && y > 0 = 1 + reglaDescartes (y:xs)
+  | otherwise = reglaDescartes (y:xs)
+
+
+--Ejercicio 5
+
+{- 
+--esSemiPerfecto :: Integer -> Bool
+--esSemiPerfecto x = sumaDivisoresPropios x == x  
+
+partes :: [Integer] -> [[Integer]]
+partes [] = [[]]
+--partes [x] = [[x]]
+partes (x:xs) = [agregarTodos x (x:xs)] ++ partes (xs) 
+
+agregarTodos :: Integer -> [Integer] -> [Integer]
+agregarTodos a [] = [[a]]
+agregarTodos a (x:xs) = (agregarTodos a [x]):(agregarTodos a xs) 
+
+listaDivPropios :: Integer -> [Integer]
+listaDivPropios x = listaDivisoresPropios x (x-1)
+
+listaDivisoresPropios :: Integer -> Integer -> [Integer]
+listaDivisoresPropios x 1 = [1]
+listaDivisoresPropios x y 
+  | x `mod` y == 0 = [y] ++ listaDivisoresPropios x (y-1) 
+  | otherwise = listaDivisoresPropios x (y-1) 
+-}
