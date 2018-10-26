@@ -11,4 +11,4 @@ Se recomiendan como una alternativa ante la dificutad para resolver ejercicios, 
 Existen ejercicios con mas de una respuesta correcta, sin embargo por lo general la aplicada es la recomendade en clases considerando los contenidos vistos hasta dicha clases.
 
 Se incluyen los pdfs con los enunciados de los ejercicios.
- Invito al lector a subir soluciones alternativas o actualizaciones a traves de pull requests.
+Invito al lector a subir soluciones alternativas o actualizaciones de la cursada.
