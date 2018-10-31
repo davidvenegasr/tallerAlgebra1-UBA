@@ -1,28 +1,28 @@
 type Set a = [a]
 
 vacio :: Set Integer
-vacio = [] 
+vacio = []
 
 agregar :: Integer -> Set Integer ->  Set Integer
-agregar n xs 
- | elem n xs = xs 
+agregar n xs
+ | elem n xs = xs
  | otherwise = n:xs
 
-incluido :: Set Integer -> Set Integer -> Bool 
+incluido :: Set Integer -> Set Integer -> Bool
 incluido [] b = True
 incluido (a:as) b
   | length (a:as) > length b = False
-  | elem a b == True = incluido as b 
-  | otherwise = False  
+  | elem a b == True = incluido as b
+  | otherwise = False
 
 iguales :: Set Integer -> Set Integer -> Bool
-iguales a b 
+iguales a b
   | length a /= length b = False
-  | otherwise = incluido a b 
+  | otherwise = incluido a b
 
 agregarATodos :: Integer -> Set (Set Integer) -> Set (Set Integer)
 agregarATodos n [] = []
-agregarATodos n (c:cls)  = (agregar n c):agregarATodos n cls 
+agregarATodos n (c:cls)  = (agregar n c):agregarATodos n cls
 
 partes :: Integer -> Set (Set Integer)
 partes 0 = [[]]
@@ -33,11 +33,22 @@ productoCartesiano [] _ = []
 productoCartesiano _ [] = []
 productoCartesiano (a:as) (b:bs) = [(a,b)] ++ productoCartesiano [a] bs ++ productoCartesiano as (b:bs)
 
-variaciones :: Set Integer -> Integer -> Set [Integer]
-variaciones _ 0 = []
-variaciones x [a:as] = []
+--variaciones (x:xs) b = [variacionesAux (x:xs) x ++ variaciones xs]
 
-variacionesAux :: Integer -> Set Integer -> Set [Integer]
-variacionesAux 0 _ = []
-variacionesAux 0 _ = []
-variacionesAux x [a:as] = [a] ++ variaciones (x-1) [as]  
+agregarATodos' :: Integer -> Set ([Integer]) -> Set [Integer]
+agregarATodos' n [] = []
+agregarATodos' n (c:cls)  = (n:c): agregarATodos' n cls
+
+agregarCadaUnoATodos :: Set Integer -> Set [Integer] -> Set [Integer]
+agregarCadaUnoATodos [] ys = []
+agregarCadaUnoATodos (x:xs) ys = (agregarATodos' x ys ) ++ (agregarCadaUnoATodos xs ys)
+
+variaciones :: Set Integer -> Integer -> Set [Integer]
+variaciones xs 0 = [[]]
+variaciones xs n = agregarCadaUnoATodos xs (variaciones xs (n-1))
+
+{-
+bolitasEnCajas :: Integer -> Integer -> Integer
+bolitasEnCajas _ 0 = 0
+bolitasEnCajas 0 _ = 0
+-bolitasEnCajas bolitas cajas = factorial (bolitas+cajas-1) -}
